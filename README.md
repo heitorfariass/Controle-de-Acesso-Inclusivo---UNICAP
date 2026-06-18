@@ -4,35 +4,35 @@
 [![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://cplusplus.com/)
 
 ## 📋 Sobre o Projeto
-[span_0](start_span)Projeto acadêmico desenvolvido com o objetivo de promover a autonomia no acesso de alunos com mobilidade reduzida (como cadeirantes) às instalações da universidade[span_0](end_span). [span_1](start_span)[span_2](start_span)Atualmente, o acesso requer que os estudantes dependam da abertura manual da porta de acessibilidade por terceiros, gerando constrangimento e redução de autonomia[span_1](end_span)[span_2](end_span). 
+Projeto acadêmico desenvolvido com o objetivo de promover a autonomia no acesso de alunos com mobilidade reduzida (como cadeirantes) às instalações da universidade. Atualmente, o acesso requer que os estudantes dependam da abertura manual da porta de acessibilidade por terceiros, gerando constrangimento e redução de autonomia. 
 
-[span_3](start_span)A solução proposta é um **Sistema Robótico de Destravamento com RFID**[span_3](end_span). [span_4](start_span)[span_5](start_span)Ao aproximar um cartão autorizado, um mecanismo controlado por Arduino aciona um servo motor para abrir e fechar uma trava de forma automática, garantindo um acesso digno, independente e inclusivo[span_4](end_span)[span_5](end_span).
+A solução proposta é um **Sistema Robótico de Destravamento com RFID**. Ao aproximar um cartão autorizado, um mecanismo controlado por Arduino aciona um servo motor para abrir e fechar uma trava de forma automática, garantindo um acesso digno, independente e inclusivo.
 
 ---
 
 ## 👥 Equipe
-* [span_6](start_span)João da Fonte[span_6](end_span)
-* [span_7](start_span)Heitor Farias Santos[span_7](end_span)
-* [span_8](start_span)Nina Lira[span_8](end_span)
-* [span_9](start_span)Marcelo Caldas[span_9](end_span)
-* [span_10](start_span)João Gabriel[span_10](end_span)
+* João da Fonte
+* Heitor Farias Santos
+* Nina Lira
+* Marcelo Caldas
+* João Gabriel
 
 ---
 
 ## ⚙️ Funcionalidades Principais
-* **[span_11](start_span)Controle de Acesso Físico:** Destravamento de porta automatizado via leitura de tags RFID[span_11](end_span).
-* **Acionamento em Alternância (Toggle):** Ao ler um cartão válido, a porta abre. [span_12](start_span)Ao ler novamente, a porta fecha[span_12](end_span).
-* **[span_13](start_span)Gestão via Master Card:** Cadastro e remoção de usuários feitos fisicamente aproximando um "Cartão Mestre", sem necessidade de plugar o Arduino no computador[span_13](end_span).
-* **[span_14](start_span)Armazenamento Não-Volátil:** Os UIDs dos cartões cadastrados são salvos na memória EEPROM nativa do Arduino (suporta até 10 cartões no código atual, expansível)[span_14](end_span).
-* **[span_15](start_span)100% Offline:** O sistema não depende de internet, servidores externos ou banco de dados em nuvem para funcionar[span_15](end_span).
+* **Controle de Acesso Físico:** Destravamento de porta automatizado via leitura de tags RFID.
+* **Acionamento em Alternância (Toggle):** Ao ler um cartão válido, a porta abre. Ao ler novamente, a porta fecha.
+* **Gestão via Master Card:** Cadastro e remoção de usuários feitos fisicamente aproximando um "Cartão Mestre", sem necessidade de plugar o Arduino no computador.
+* **Armazenamento Não-Volátil:** Os UIDs dos cartões cadastrados são salvos na memória EEPROM nativa do Arduino (suporta até 10 cartões no código atual, expansível).
+* **100% Offline:** O sistema não depende de internet, servidores externos ou banco de dados em nuvem para funcionar.
 
 ---
 
 ## 🛠️ Hardware e Componentes
-* **[span_16](start_span)Microcontrolador:** Arduino Uno[span_16](end_span)
-* **[span_17](start_span)Módulo de Leitura:** Leitor RFID RC522 (Frequência 13.56 MHz)[span_17](end_span)
-* **[span_18](start_span)Atuador:** Servo Motor de Rotação Contínua (SG90 modificado / 360º)[span_18](end_span)
-* **[span_19](start_span)[span_20](start_span)Mecânica:** Mecanismo de trava impresso em 3D (Cremalheira e Pinhão)[span_19](end_span)[span_20](end_span) e Estrutura do portão cortada a laser em MDF.
+* **Microcontrolador:** Arduino Uno
+* **Módulo de Leitura:** Leitor RFID RC522 (Frequência 13.56 MHz).
+* **Atuador:** Servo Motor de Rotação Contínua (SG90 modificado / 360º).
+* **Mecânica:** Mecanismo de trava impresso em 3D (Cremalheira e Pinhão) e Estrutura do portão cortada a laser em MDF.
 
 ### 🔌 Esquema de Ligação (Pinagem)
 
