@@ -1,0 +1,196 @@
+**Código Completo**
+
+#include <SPI.h>
+#include <MFRC522.h>
+#include <EEPROM.h>
+#include <Servo.h> 
+
+#define SS_PIN 10
+#define RST_PIN 9
+
+MFRC522 rfid(SS_PIN, RST_PIN);
+
+Servo meuServo;
+#define PINO_SERVO 7
+
+String masterID = "63:13:ED:1B"; 
+String whitelist[10];            
+int cartoesCadastrados = 0;
+
+enum EstadoSistema { NORMAL, ADMIN, AGUARDANDO_REMOCAO };
+EstadoSistema estadoAtual = NORMAL;
+String tagPendenteRemocao = ""; 
+
+const int TAMANHO_ID = 12;
+
+bool portaAberta = false;
+
+void carregarEEPROM();
+void salvarNaEEPROM(int indice, String id);
+void atualizarContadorEEPROM();
+int buscarTag(String id);
+void removerTag(String id);
+void acionarPorta();
+
+void setup() {
+  Serial.begin(9600);
+  SPI.begin();
+  rfid.PCD_Init();
+
+  meuServo.attach(PINO_SERVO);
+  meuServo.write(90); 
+
+  carregarEEPROM();
+
+  Serial.println("--- SISTEMA DE ACESSO UNICAP ---");
+  Serial.print("Tags atualmente cadastradas na memoria: ");
+  Serial.println(cartoesCadastrados);
+  Serial.println("Aproxime o Master Card para gerenciar o sistema.");
+}
+
+void loop() {
+  if (!rfid.PICC_IsNewCardPresent()) return;
+  if (!rfid.PICC_ReadCardSerial()) return;
+
+  String idLido = "";
+  for (byte i = 0; i < rfid.uid.size; i++) {
+    idLido += (rfid.uid.uidByte[i] < 0x10 ? "0" : "");
+    idLido += String(rfid.uid.uidByte[i], HEX);
+    if (i < rfid.uid.size - 1) idLido += ":"; 
+  }
+  idLido.toUpperCase();
+
+  Serial.print("\nTag detectada: [" + idLido + "]");
+
+  if (idLido == masterID) {
+    if (estadoAtual == AGUARDANDO_REMOCAO) {
+      Serial.println("\n>>> REMOCAO CANCELADA. Retornando ao Modo Normal.");
+      estadoAtual = NORMAL;
+      tagPendenteRemocao = "";
+    } else if (estadoAtual == NORMAL) {
+      estadoAtual = ADMIN;
+      Serial.println("\n>>> MODO ADMIN ATIVADO. Aproxime tag para cadastrar ou remover.");
+    } else if (estadoAtual == ADMIN) {
+      estadoAtual = NORMAL;
+      Serial.println("\n>>> MODO ADMIN DESATIVADO.");
+    }
+  } 
+  else if (estadoAtual == ADMIN) {
+    int indiceEncontrado = buscarTag(idLido);
+    
+    if (indiceEncontrado >= 0) {
+      estadoAtual = AGUARDANDO_REMOCAO;
+      tagPendenteRemocao = idLido;
+      Serial.println("\nAVISO: Este cartao ja esta cadastrado. Deseja remove-lo?");
+      Serial.println("-> Aproxime a MESMA tag novamente para CONFIRMAR a remocao.");
+      Serial.println("-> Aproxime o Master Card para CANCELAR a operacao.");
+    } else {
+      if (cartoesCadastrados < 10) {
+        whitelist[cartoesCadastrados] = idLido;
+        salvarNaEEPROM(cartoesCadastrados, idLido);
+        cartoesCadastrados++;
+        atualizarContadorEEPROM();
+        Serial.println("\nSUCESSO: Cartao cadastrado com seguranca offline!");
+      } else {
+        Serial.println("\nERRO: Lista cheia!");
+      }
+      estadoAtual = NORMAL; 
+    }
+  } 
+  else if (estadoAtual == AGUARDANDO_REMOCAO) {
+    if (idLido == tagPendenteRemocao) {
+      removerTag(idLido);
+      Serial.println("\nSUCESSO: Tag removida definitivamente do sistema!");
+      estadoAtual = NORMAL;
+      tagPendenteRemocao = "";
+    } else {
+      Serial.println("\nERRO: Tag diferente. Aproxime a tag correta para confirmar remocao ou Master Card para cancelar.");
+    }
+  }
+  else {
+    if (buscarTag(idLido) >= 0) {
+      acionarPorta();
+    } else {
+      Serial.println("\nACESSO NEGADO.");
+    }
+  }
+
+  rfid.PICC_HaltA();
+  rfid.PCD_StopCrypto1();
+}
+
+int buscarTag(String id) {
+  for (int i = 0; i < cartoesCadastrados; i++) {
+    if (whitelist[i] == id) return i;
+  }
+  return -1;
+}
+
+void removerTag(String id) {
+  int indice = buscarTag(id);
+  if (indice == -1) return; 
+
+  for (int i = indice; i < cartoesCadastrados - 1; i++) {
+    whitelist[i] = whitelist[i + 1];
+  }
+  
+  whitelist[cartoesCadastrados - 1] = ""; 
+  cartoesCadastrados--;
+  atualizarContadorEEPROM();
+
+  for (int i = 0; i < cartoesCadastrados; i++) {
+    salvarNaEEPROM(i, whitelist[i]);
+  }
+}
+
+void carregarEEPROM() {
+  cartoesCadastrados = EEPROM.read(0);
+
+  if(cartoesCadastrados > 10 || cartoesCadastrados < 0) {
+    cartoesCadastrados = 0;
+    EEPROM.write(0, 0);
+  }
+
+  for (int i = 0; i < cartoesCadastrados; i++) {
+    int enderecoBase = 1 + (i * TAMANHO_ID);
+    char buffer[TAMANHO_ID];
+
+    for(int j = 0; j < TAMANHO_ID; j++) {
+      buffer[j] = EEPROM.read(enderecoBase + j);
+    }
+    whitelist[i] = String(buffer);
+  }
+}
+
+void salvarNaEEPROM(int indice, String id) {
+  int enderecoBase = 1 + (indice * TAMANHO_ID);
+
+  char buffer[TAMANHO_ID];
+  id.toCharArray(buffer, TAMANHO_ID);
+
+  for(int j = 0; j < TAMANHO_ID; j++) {
+    EEPROM.write(enderecoBase + j, buffer[j]);
+  }
+}
+
+void atualizarContadorEEPROM() {
+  EEPROM.write(0, cartoesCadastrados);
+}
+
+void acionarPorta() {
+  if (!portaAberta) {
+    Serial.println("\nABRINDO PORTA...");
+    meuServo.write(80); 
+    delay(1000); 
+    meuServo.write(90); 
+    Serial.println("PORTA ABERTA.");
+    portaAberta = true;
+  } else {
+    Serial.println("\nFECHANDO PORTA...");
+    meuServo.write(100); 
+    delay(1000); 
+    meuServo.write(90); 
+    Serial.println("PORTA TRANCADA.");
+    portaAberta = false;
+  }
+}
