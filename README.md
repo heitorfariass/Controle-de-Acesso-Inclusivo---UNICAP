@@ -217,11 +217,10 @@ Ideias para próximas versões — contribuições são bem-vindas:
 
 | Nome | GitHub | LinkedIn |
 | :--- | :--- | :--- |
+| Heitor Farias Santos | [@heitorfariass](https://github.com/heitorfariass) | www.linkedin.com/in/heitorfariassantos/ |
 | João da Fonte | — | — |
-| Heitor Farias Santos | [@heitorfariass](https://github.com/heitorfariass) | — |
 | Nina Lira | — | — |
 | Marcelo Caldas | — | — |
-| João Gabriel | — | — |
 
 ## 🙏 Agradecimentos
 
