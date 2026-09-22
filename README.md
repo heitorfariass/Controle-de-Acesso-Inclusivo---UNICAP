@@ -218,7 +218,7 @@ Ideias para próximas versões — contribuições são bem-vindas:
 | Nome | GitHub | LinkedIn |
 | :--- | :--- | :--- |
 | Heitor Farias Santos | [@heitorfariass](https://github.com/heitorfariass) | www.linkedin.com/in/heitorfariassantos/ |
-| João da Fonte | — | — |
+| João da Fonte | [@joaodafontequeiroz](https://github.com/joaodafontequeiroz) | www.linkedin.com/in/joao-da-fonte-queiroz-280822363 |
 | Nina Lira | — | — |
 | Marcelo Caldas | — | — |
 
