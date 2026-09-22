@@ -224,7 +224,7 @@ Ideias para próximas versões — contribuições são bem-vindas:
 
 ## 🙏 Agradecimentos
 
-À disciplina de **Robótica Inclusiva** da [UNICAP — Universidade Católica de Pernambuco](https://www.unicap.br/) e ao professor *(adicione o nome)*, pela orientação e pelo incentivo a projetos com impacto social real.
+À disciplina de **Robótica Inclusiva** da [UNICAP — Universidade Católica de Pernambuco](https://www.unicap.br/) e aos professores *Wilmer Cordoba e Emmanuel Barreto*, pela orientação e pelo incentivo a projetos com impacto social real.
 
 ---
 
