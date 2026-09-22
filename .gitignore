@@ -1,0 +1,20 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Builds da Arduino IDE / PlatformIO
+build/
+.build/
+firmware/**/*.hex
+firmware/**/*.elf
+.vscode/
+.idea/
+
+# Arquivos temporários de edição
+*~
+*.swp
+*.bak
+
+# Workspace do agente
+.freebuff/

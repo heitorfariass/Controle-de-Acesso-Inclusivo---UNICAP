@@ -1,5 +1,3 @@
-**Código Completo**
-
 #include <SPI.h>
 #include <MFRC522.h>
 #include <EEPROM.h>

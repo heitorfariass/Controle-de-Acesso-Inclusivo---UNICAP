@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: "Sistema Robótico de Destravamento com RFID - Acessibilidade UNICAP"
+message: >-
+  Se você utilizar este projeto em sua pesquisa, por favor
+  cite-o usando os metadados deste arquivo.
+type: software
+authors:
+  - given-names: João
+    family-names: da Fonte
+  - given-names: Heitor
+    family-names: Farias Santos
+  - given-names: Nina
+    family-names: Lira
+  - given-names: Marcelo
+    family-names: Caldas
+  - given-names: João
+    family-names: Gabriel
+keywords:
+  - arduino
+  - rfid
+  - acessibilidade
+  - inclusao
+  - robotica
+  - automacao
+license: MIT
+repository-code: "https://github.com/heitorfariass/Controle-de-Acesso-Inclusivo---UNICAP"
+version: 1.0.0
+date-released: "2026-09-22"
+abstract: >-
+  Projeto acadêmico (Robótica Inclusiva / UNICAP) que promove a autonomia
+  de estudantes com mobilidade reduzida por meio de um sistema de
+  destravamento de porta controlado por Arduino, com leitura RFID,
+  gestão de acessos via Cartão Mestre e persistência em EEPROM.
