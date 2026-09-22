@@ -219,8 +219,8 @@ Ideias para próximas versões — contribuições são bem-vindas:
 | :--- | :--- | :--- |
 | Heitor Farias Santos | [@heitorfariass](https://github.com/heitorfariass) | www.linkedin.com/in/heitorfariassantos/ |
 | João da Fonte | [@joaodafontequeiroz](https://github.com/joaodafontequeiroz) | www.linkedin.com/in/joao-da-fonte-queiroz-280822363 |
-| Nina Lira | [@ninalira](https://github.com/ninalira) | https://www.linkedin.com/in/nina-lira-b29961325/ |
-| Marcelo Caldas | — | https://www.linkedin.com/in/marcelo-caldas-de-ara%C3%BAjo-filho-4aa669394/ |
+| Nina Lira | [@ninalira](https://github.com/ninalira) | /www.linkedin.com/in/nina-lira-b29961325/ |
+| Marcelo Caldas | — | www.linkedin.com/in/marcelo-caldas-de-ara%C3%BAjo-filho-4aa669394/ |
 
 ## 🙏 Agradecimentos
 
